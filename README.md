@@ -5,11 +5,16 @@ Setupping the SHT31 with Raspberry Pi Pico-SDK
 # Wiring
 
 SHT VIN : Pico 3V3
+
 SHT GND : Pico GND
+
 SHT SCL : Pico GP17
+
 SHT SDA : Pico GP16
 
 # Build
+
+Pico-SDK source must be on the Path. I created the project using the pico-project-generator.
 
 ```
 cd build
