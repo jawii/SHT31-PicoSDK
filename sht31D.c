@@ -24,23 +24,22 @@ int main()
     gpio_set_function(sda_pin, GPIO_FUNC_I2C);
     gpio_set_function(scl_pin, GPIO_FUNC_I2C);
 
-    // Send high repeatability measurement command
-    char config[2] = {0};
-    config[0] = 0x2C;
-    config[1] = 0x06;
-    i2c_write_blocking(i2c, SHT31_DEFAULT_ADDR, config, 2, true);
-    sleep_ms(2000);
-
     while (true)
     {
         sleep_ms(2000);
         gpio_put(LED_PIN, 1);
 
+        // Send high repeatability measurement command
+        char config[2] = {0};
+        config[0] = 0x2C;
+        config[1] = 0x06;
+        i2c_write_blocking(i2c, SHT31_DEFAULT_ADDR, config, 2, true);
+        sleep_ms(2000);
+
         // Read 6 bytes of data: temp msb, temp lsb, temp CRC, humidity msb, humidity lsb, humidity CRC
         char data[6] = {0};
         i2c_read_blocking(i2c, SHT31_DEFAULT_ADDR, data, 6, true);
         printf("%i\t%i\t%i\t%i\t%i\t%i", data[0], data[1], data[2], data[3], data[4], data[5]);
-
         double cTemp = (((data[0] * 256) + data[1]) * 175.0) / 65535.0 - 45.0;
         double humidity = (((data[3] * 256) + data[4])) * 100.0 / 65535.0;
         printf("\tTemperature: %.1f C \tHumidity: %.1f RH\n", cTemp, humidity);
