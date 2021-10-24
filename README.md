@@ -4,6 +4,8 @@ Setupping the SHT31 with Raspberry Pi Pico-SDK
 
 # Wiring
 
+![Wiring](/wiring.jpg?raw=true "Wiring")
+
 SHT VIN : Pico 3V3
 
 SHT GND : Pico GND
