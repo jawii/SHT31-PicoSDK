@@ -46,6 +46,4 @@ int main()
 
         gpio_put(LED_PIN, 0);
     }
-
-    return 0;
 }
